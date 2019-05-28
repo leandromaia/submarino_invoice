@@ -9,9 +9,15 @@ list_line_objects = list()
 
 for line in reader.readlines():
     total_values = len(line.split())
+    date = line.split()[0]
+    value = line.split()[total_values-2:total_values-1][0]
+    raw_description = line.replace(date, "").replace(value, "")
+
     obj_line = {
-        "date": line.split()[0],
-        "description":
-        "value": line.split()[total_values-2:total_values-1]
+        "date": date,
+        "description": raw_description,
+        "value": value
     }
-    import pdb; pdb.set_trace()
+    list_line_objects.append(obj_line)
+
+print(list_line_objects)
