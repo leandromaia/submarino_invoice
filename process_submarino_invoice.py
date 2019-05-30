@@ -12,6 +12,7 @@ for line in reader.readlines():
     date = line.split()[0]
     value = line.split()[total_values-2:total_values-1][0]
     raw_description = line.replace(date, "").replace(value, "")
+    raw_description = raw_description.strip('D\n').strip()
 
     obj_line = {
         "date": date,
@@ -27,7 +28,7 @@ file_csv_path = 'final_file.csv'
 writer = open(file_csv_path, 'w')
 
 for obj in list_line_objects:
-    writer.write("{0};{1};{2}".format(
+    writer.writelines("{0};{1};{2}\n".format(
                                     obj.get('date'),
                                     obj.get('description'),
                                     obj.get('value')))
